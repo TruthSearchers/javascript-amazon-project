@@ -19,7 +19,7 @@ products.forEach(obj=>{
   </div>
 
   <div class="product-price">
-    ${(obj.priceCents/100).toFixed(2)}
+    $${(obj.priceCents/100).toFixed(2)}
   </div>
 
   <div class="product-quantity-container">
@@ -44,12 +44,78 @@ products.forEach(obj=>{
     Added
   </div>
 
-  <button class="add-to-cart-button button-primary">
+  <button class="add-to-cart-button button-primary" data-product-id="${obj.id}">
     Add to Cart
   </button>
 </div>`;
   document.querySelector('.products-grid').innerHTML+=html
 });
+
+
+
+
+
+let f=1;
+
+let timeoutid;
+
+document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
+  button.onclick=()=>{
+    
+    const productId=button.dataset.productId;
+    
+    let match=false;
+    cart.forEach(obj=>{
+      if(obj.productId===productId){
+        match=true;
+      }
+      
+    })
+    let s=document.querySelectorAll('select');
+    
+    f=Number(s[index].value);
+    
+    
+
+    if(match){
+      cart.quantity=cart.quantity+f;
+
+    }
+    else{
+      
+      cart.push({
+        productId:productId,
+        quantity:f
+      })
+      
+    }
+
+   
+    let k= cart.reduce((acc, obj)=>{
+      return acc+obj.quantity;
+    },0)
+  
+    document.querySelectorAll('.added-to-cart')[index].style.opacity=1;
+
+    clearTimeout(timeoutid);
+
+    timeoutid=setTimeout(()=>{
+      document.querySelectorAll('.added-to-cart')[index].style.opacity=0;
+    },2000)
+    
+    document.querySelector('.cart-quantity').innerText=`${k}`;
+    
+    
+    
+  }
+  }
+)
+
+
+
+
+
+
 
 
 
