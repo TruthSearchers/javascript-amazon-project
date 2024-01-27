@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js'
+import {cart, addToCart} from '../data/cart.js'
 import {products} from '../data/products.js'
 
 products.forEach(obj=>{
@@ -58,45 +58,21 @@ products.forEach(obj=>{
 
 
 let f=1;
-
 let timeoutid;
+
+function updateCartQuantity(){
+  let k= cart.reduce((acc, obj)=>{
+    return acc+obj.quantity;
+  },0)
+  document.querySelector('.cart-quantity').innerText=`${k}`;
+}
 
 document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
   button.onclick=()=>{
-    
     const productId=button.dataset.productId;
-    
-    let match=false;
-    cart.forEach(obj=>{
-      if(obj.productId===productId){
-        match=true;
-      }
-      
-    })
-    let s=document.querySelectorAll('select');
-    
-    f=Number(s[index].value);
-    
-    
-
-    if(match){
-      cart.quantity=cart.quantity+f;
-
-    }
-    else{
-      
-      cart.push({
-        productId:productId,
-        quantity:f
-      })
-      
-    }
-
+    addToCart(productId,index,f);
+    updateCartQuantity();
    
-    let k= cart.reduce((acc, obj)=>{
-      return acc+obj.quantity;
-    },0)
-  
     document.querySelectorAll('.added-to-cart')[index].style.opacity=1;
 
     clearTimeout(timeoutid);
@@ -105,10 +81,7 @@ document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
       document.querySelectorAll('.added-to-cart')[index].style.opacity=0;
     },2000)
     
-    document.querySelector('.cart-quantity').innerText=`${k}`;
-    
-    
-    
+        
   }
   }
 )
