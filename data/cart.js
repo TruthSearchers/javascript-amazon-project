@@ -1,4 +1,6 @@
-export const cart=[]
+export const cart=JSON.parse(localStorage.getItem('cart'))||[
+  
+]
 
 export function addToCart(productId,index,f){
  
@@ -29,3 +31,4 @@ export function addToCart(productId,index,f){
     
   }
 }
+

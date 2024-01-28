@@ -1,6 +1,8 @@
 import {cart, addToCart} from '../data/cart.js'
 import {products} from '../data/products.js'
 
+
+
 products.forEach(obj=>{
   const html =`<div class="product-container">
   <div class="product-image-container">
@@ -60,12 +62,18 @@ products.forEach(obj=>{
 let f=1;
 let timeoutid;
 
-function updateCartQuantity(){
+
+document.querySelector('.cart-quantity').innerText=`${updateCartQuantity()}`;
+
+export function updateCartQuantity(){
   let k= cart.reduce((acc, obj)=>{
     return acc+obj.quantity;
   },0)
-  document.querySelector('.cart-quantity').innerText=`${k}`;
+  
+  return k;
 }
+
+
 
 document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
   button.onclick=()=>{
@@ -81,6 +89,7 @@ document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
       document.querySelectorAll('.added-to-cart')[index].style.opacity=0;
     },2000)
     
+    localStorage.setItem('cart',JSON.stringify(cart));
         
   }
   }
