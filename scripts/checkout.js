@@ -87,8 +87,17 @@ function renderOrderSummary(){
 
 
   function dateToDeliver(delivery){
-    const today = dayjs();
-    return today.add(delivery.deliveryDays,'days').format('dddd, MMMM D');
+    const today = dayjs()
+    const days = today.add(delivery.deliveryDays,'days').format('dddd')
+    if(days==='Sunday'){
+      return today.add(delivery.deliveryDays+1,'days').format('dddd, MMMM D')
+    }
+    else if(days==='Saturday'){
+      return today.add(delivery.deliveryDays+2,'days').format('dddd, MMMM D')
+    }
+    else{
+      return today.add(delivery.deliveryDays,'days').format('dddd, MMMM D')
+    }
   }
 
   function deliveryHTML(id,obj){
