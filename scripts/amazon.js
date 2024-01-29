@@ -1,4 +1,4 @@
-import {cart, addToCart} from '../data/cart.js'
+import {cart, addToCart,updateCartQuantity} from '../data/cart.js'
 import {products} from '../data/products.js'
 
 
@@ -62,16 +62,8 @@ products.forEach(obj=>{
 let f=1;
 let timeoutid;
 
-
 document.querySelector('.cart-quantity').innerText=`${updateCartQuantity()}`;
 
-export function updateCartQuantity(){
-  let k= cart.reduce((acc, obj)=>{
-    return acc+obj.quantity;
-  },0)
-  
-  return k;
-}
 
 
 
@@ -79,7 +71,7 @@ document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
   button.onclick=()=>{
     const productId=button.dataset.productId;
     addToCart(productId,index,f);
-    updateCartQuantity();
+    document.querySelector('.cart-quantity').innerText=`${updateCartQuantity()}`;
    
     document.querySelectorAll('.added-to-cart')[index].style.opacity=1;
 
@@ -89,11 +81,13 @@ document.querySelectorAll('.add-to-cart-button').forEach((button,index)=>{
       document.querySelectorAll('.added-to-cart')[index].style.opacity=0;
     },2000)
     
-    localStorage.setItem('cart',JSON.stringify(cart));
+    
         
   }
   }
 )
+
+
 
 
 
