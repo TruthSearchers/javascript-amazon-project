@@ -1,4 +1,4 @@
-import {formatMoney} from '../scripts/utils/money.js';
+import {formatMoney} from '../../scripts/utils/money.js';
 
 describe('formatMoney', () => {
   it('formats the cents into dollars', () => {
