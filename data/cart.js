@@ -71,16 +71,14 @@ export function del(productId,products,delivery){
   })
   
   cart=arr;
-
-  document.querySelector(`.cart-item-container-${productId}`).remove();
-
-
-    
-  document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
-
-  document.querySelector('.num').innerText=`${updateCartQuantity()}`;
-  calculatePrice(cart,products,delivery);
   addToStorage();
+  document.querySelector(`.cart-item-container-${productId}`).remove();
+    
+  // document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
+
+  // document.querySelector('.num').innerText=`${updateCartQuantity()}`;
+  // calculatePrice(cart,products,delivery);
+  
 }
 
 export function updateCart(productId,products,delivery){
@@ -149,7 +147,9 @@ export function calculatePrice(k,products,delivery){
     total=Number(tbt+tax).toFixed(2);
   }  
   document.querySelector('.payment-summary-money').innerText=`$${price.toFixed(2)}`
-  document.querySelector('.shipping').innerText=`$${shipping.toFixed(2)}`
+  document.querySelector('.shipping').innerText=`$${shipping}`
+
+  console.log(tbt)
 
   document.querySelector('.tbt').innerText=`$${tbt}`
 

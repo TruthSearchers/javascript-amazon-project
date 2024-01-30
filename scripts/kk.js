@@ -8,13 +8,6 @@ import { deliveryOptions } from '../data/deliveryOptions.js';
 
 
 
-document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
-
-document.querySelector('.num').innerText=`${updateCartQuantity()}`;
-
-
-
-calculatePrice(cart,products,deliveryOptions);
 
 export function renderOrderSummary(){
   const orderSummaryContainer = document.querySelector('.order-summary');
@@ -33,7 +26,7 @@ export function renderOrderSummary(){
     })
 
     const deliveryDate= dateToDeliver(deliveryOption);
-    let html=`<div class="cart-item-container-${products[i].id}">
+    let html=`<div class="cart-item-container-${products[i].id} cart-item-container">
     <div class="delivery-date">
       Delivery Time: ${deliveryDate}
     </div>
@@ -49,14 +42,16 @@ export function renderOrderSummary(){
         <div class="product-price">
           $${(products[i].priceCents/100).toFixed(2)}
         </div>
-        <div class="product-quantity">
+        <div class="product-quantity
+        js-product-quantity-${products[i].id}
+        ">
           <span>
             Quantity: <span class="quantity-label-${products[i].id}">${obj.quantity}</span>
           </span>
           <span class="update-quantity-link link-primary js-update-quantity-link-${products[i].id}" data-product-id='${products[i].id}'>
             Update
           </span>
-          <span class="delete-quantity-link link-primary js-delete-link" data-product-id='${products[i].id}'>
+          <span class="delete-quantity-link link-primary js-delete-link js-del-link-${products[i].id}" data-product-id='${products[i].id}'>
             Delete
           </span>
         </div>
@@ -167,10 +162,6 @@ export function renderOrderSummary(){
     obj.onclick=()=>{
       const productId= obj.dataset.productId;
       del(productId,products,deliveryOptions);
-      document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
-
-      document.querySelector('.num').innerText=`${updateCartQuantity()}`;
-      calculatePrice(cart,products,delivery);
       
     }
 
@@ -190,9 +181,7 @@ export function renderOrderSummary(){
 
 }
 
-document.addEventListener('DOMContentLoaded',()=>{
-  renderOrderSummary();
-})
+
 
 
   
