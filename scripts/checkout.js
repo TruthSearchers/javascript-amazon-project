@@ -170,7 +170,7 @@ export function renderOrderSummary(){
       document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
 
       document.querySelector('.num').innerText=`${updateCartQuantity()}`;
-      calculatePrice(cart,products,delivery);
+      
       
     }
 

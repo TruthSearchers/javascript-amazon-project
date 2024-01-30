@@ -77,7 +77,7 @@ export function del(productId,products,delivery){
   // document.querySelector('.return-to-home-link').innerText=`${updateCartQuantity()} items`
 
   // document.querySelector('.num').innerText=`${updateCartQuantity()}`;
-  // calculatePrice(cart,products,delivery);
+  calculatePrice(cart,products,delivery);
   
 }
 
